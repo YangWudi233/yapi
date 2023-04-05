@@ -1,4 +1,4 @@
-declare namespace API {
+ declare namespace API {
   type ApiResponse = {
     code?: number;
     type?: string;

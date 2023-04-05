@@ -5101,7 +5101,7 @@ packages:
       lodash: 4.17.21
       moment: 2.29.4
       qiankun: 2.9.3
-      react-intl: 3.12.1_react@18.2.0
+      : 3.12.1_react@18.2.0
       react-redux: 8.0.5_ctrls2ti7t7iutxbwkm5ipogyy
       redux: 4.2.1
       styled-components: 6.0.0-beta.6_biqbaboplfbrettd7655fr4n2y
@@ -5145,7 +5145,7 @@ packages:
       lodash: 4.17.21
       moment: 2.29.4
       qiankun: 2.9.3
-      react-intl: 3.12.1_react@18.2.0
+      : 3.12.1_react@18.2.0
       react-redux: 8.0.5_ctrls2ti7t7iutxbwkm5ipogyy
       redux: 4.2.1
       styled-components: 6.0.0-beta.9_biqbaboplfbrettd7655fr4n2y
@@ -5190,7 +5190,7 @@ packages:
       lodash: 4.17.21
       moment: 2.29.4
       qiankun: 2.9.3
-      react-intl: 3.12.1_react@18.2.0
+      : 3.12.1_react@18.2.0
       react-redux: 8.0.5_ctrls2ti7t7iutxbwkm5ipogyy
       redux: 4.2.1
       styled-components: 6.0.0-beta.9_biqbaboplfbrettd7655fr4n2y
@@ -14171,7 +14171,7 @@ packages:
       shallowequal: 1.1.0
     dev: true
 
-  /react-intl/3.12.1_react@18.2.0:
+  //3.12.1_react@18.2.0:
     resolution: {integrity: sha512-cgumW29mwROIqyp8NXStYsoIm27+8FqnxykiLSawWjOxGIBeLuN/+p2srei5SRIumcJefOkOIHP+NDck05RgHg==}
     peerDependencies:
       react: ^16.3.0
