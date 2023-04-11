@@ -67,6 +67,12 @@ declare namespace API {
     autoLogin?: boolean;
     type?: string;
   };
+  type RegisterParms = {
+    userAccount?: string;
+    userPassword?: string;
+    checkPassword?: string;
+    type?: string;
+  };
 
   type ErrorResponse = {
     /** 业务约定的错误码 */

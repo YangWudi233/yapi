@@ -20,30 +20,9 @@ import { Alert, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
 import Settings from '../../../../config/defaultSettings';
-import {userLoginUsingPOST} from "@/services/yslapi-backend/userController";
+import {userLoginUsingPOST, userRegisterUsingPOST} from "@/services/yslapi-backend/userController";
 import {Link} from "react-router-dom";
-const ActionIcons = () => {
-  const langClassName = useEmotionCss(({ token }) => {
-    return {
-      marginLeft: '8px',
-      color: 'rgba(0, 0, 0, 0.2)',
-      fontSize: '24px',
-      verticalAlign: 'middle',
-      cursor: 'pointer',
-      transition: 'color 0.3s',
-      '&:hover': {
-        color: token.colorPrimaryActive,
-      },
-    };
-  });
-  return (
-    <>
-      <AlipayCircleOutlined key="AlipayCircleOutlined" className={langClassName} />
-      <TaobaoCircleOutlined key="TaobaoCircleOutlined" className={langClassName} />
-      <WeiboCircleOutlined key="WeiboCircleOutlined" className={langClassName} />
-    </>
-  );
-};
+
 const Lang = () => {
   const langClassName = useEmotionCss(({ token }) => {
     return {
@@ -60,21 +39,7 @@ const Lang = () => {
   });
   return;
 };
-const LoginMessage: React.FC<{
-  content: string;
-}> = ({ content }) => {
-  return (
-    <Alert
-      style={{
-        marginBottom: 24,
-      }}
-      message={content}
-      type="error"
-      showIcon
-    />
-  );
-};
-const Login: React.FC = () => {
+const Register: React.FC = () => {
   const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
@@ -100,24 +65,20 @@ const Login: React.FC = () => {
       });
     }
   };
-  const handleSubmit = async (values: API.UserLoginRequest) => {
+  const handleSubmit = async (values: API.UserRegisterRequest) => {
     try {
-      // 登录
-      // alert(values.userAccount);
-      const res = await userLoginUsingPOST({
+      // 注册
+      const res = await userRegisterUsingPOST({
         ...values,
       });
       if (res.data) {
-        const urlParams = new URL(window.location.href).searchParams;
-        history.push(urlParams.get('redirect') || '/');
-        setInitialState({
-          loginUser: res.data
-        })
+        //注册成功，跳转到登录页
+        message.success("注册成功");
+        history.push("/user/login/");
         return;
       }
-      setUserLoginState(res);
     } catch (error) {
-      const defaultLoginFailureMessage = '登录失败，请重试！';
+      const defaultLoginFailureMessage = '注册失败，请重试！';
       console.log(error);
       message.error(defaultLoginFailureMessage);
     }
@@ -127,7 +88,7 @@ const Login: React.FC = () => {
     <div className={containerClassName}>
       <Helmet>
         <title>
-          {'登录'}- {Settings.title}
+          {'注册'}- {Settings.title}
         </title>
       </Helmet>
       <Lang />
@@ -138,6 +99,11 @@ const Login: React.FC = () => {
         }}
       >
         <LoginForm
+          submitter={{
+            searchConfig: {
+              submitText: '注册'
+            }
+          }}
           contentStyle={{
             minWidth: 280,
             maxWidth: '75vw',
@@ -159,11 +125,14 @@ const Login: React.FC = () => {
             items={[
               {
                 key: 'account',
-                label: '账户密码登录',
+                label: '用户注册',
               },
-
             ]}
           />
+
+          {status === 'error' && loginType === 'account' && (
+            <LoginMessage content={'错误的用户名和密码(admin/ant.design)'} />
+          )}
           {type === 'account' && (
             <>
               <ProFormText
@@ -194,18 +163,38 @@ const Login: React.FC = () => {
                   },
                 ]}
               />
+            <ProFormText.Password
+              name="checkPassword"
+              fieldProps={{
+                size: 'large',
+                prefix: <LockOutlined />,
+                // prefix: <LockOutlined className={styles.prefixIcon} />,
+              }}
+              placeholder={'请再次输入密码！'}
+              rules={[
+                {
+                  required: true,
+                  message: '确认密码是必填项！',
+                },
+                {
+                  min: 8,
+                  type: 'string',
+                  message: '长度不能小于8！',
+                },
+              ]}
+            />
+
             </>
           )}
-
-
           <div
             style={{
               marginBottom: 24,
             }}
           >
-            <Link to="/user/register" style={{
+            <Link to="/user/login" style={{
               float: 'right',
-            }} >用户注册</Link>
+            }}>用户登录</Link>
+
           </div>
         </LoginForm>
       </div>
@@ -213,4 +202,4 @@ const Login: React.FC = () => {
     </div>
   );
 };
-export default Login;
+export default Register;

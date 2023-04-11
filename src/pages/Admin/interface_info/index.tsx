@@ -22,6 +22,8 @@ import {
 } from "@/services/yslapi-backend/interfaceInfoController";
 import CreateModal from "@/pages/Admin/interface_info/components/CreateModal";
 import UpdateModal from "@/pages/Admin/interface_info/components/UpdateModal";
+import {getInitialState} from "@/app";
+const loginPath = 'http://localhost:8000/admin/interface_info';
 
 /**
  * @en-US Add node
@@ -207,32 +209,36 @@ const TableList: React.FC = () => {
       dataIndex: 'description',
       valueType: 'textarea',
     },
+
     {
       title: '请求方法',
       dataIndex: 'method',
-      valueType: 'text',
+      width: 48,
     },
     {
-      title: 'url',
+      title: '网络地址url',
+      hideInForm:true,
       dataIndex: 'url',
-      valueType: 'text',
-    },
-    {
-      title: '请求参数',
-      dataIndex: 'requestParams',
-      valueType: 'jsonCode',
-    },
+      valueType: 'textarea',
 
-    {
-      title: '请求头',
-      dataIndex: 'requestHeader',
-      valueType: 'jsonCode',
     },
-    {
-      title: '响应头',
-      dataIndex: 'responseHeader',
-      valueType: 'jsonCode',
-    },
+    // {
+    //   title: '请求参数',
+    //   dataIndex: 'requestParams',
+    //   hideInForm:true,
+    //   valueType: 'textarea',
+    // },
+    // {
+    //   title: '请求头',
+    //   dataIndex: 'requestHeader',
+    //   hideInForm:true,
+    //   valueType: 'textarea',
+    // },
+    // {
+    //   title: '响应头',
+    //   dataIndex: 'responseHeader',
+    //   valueType: 'textarea ',
+    // },
     {
       title: '状态',
       dataIndex: 'status',
@@ -245,13 +251,13 @@ const TableList: React.FC = () => {
     {
       title: '创建时间',
       dataIndex: 'createTime',
-      valueType: 'dateTime',
+      valueType: 'dateRange',
       hideInForm: true,
     },
     {
       title: '更新时间',
       dataIndex: 'updateTime',
-      valueType: 'dateTime',
+      valueType: 'dateRange',
       hideInForm: true
     },
     {
@@ -275,8 +281,8 @@ const TableList: React.FC = () => {
           }}
         >
           发布
-        </a>: null,
-        record.status === 1 ? <Button
+        </a>:
+         <Button
           type="text"
           key="config"
           danger
@@ -285,8 +291,7 @@ const TableList: React.FC = () => {
           }}
         >
           下线
-        </Button> : null,
-
+        </Button>,
         <Button
           type="text"
           key="config"
@@ -303,12 +308,13 @@ const TableList: React.FC = () => {
   ];
   return (
     <PageContainer>
-      <ProTable<API.RuleListItem, API.PageParams>
+      <ProTable<API.RuleListItem,API.PageParams>
         headerTitle={'查询表格'}
+        columns={columns}
         actionRef={actionRef}
         rowKey="key"
         search={{
-          labelWidth: 120,
+          labelWidth: 'auto',
         }}
         toolBarRender={() => [
           <Button
@@ -321,7 +327,6 @@ const TableList: React.FC = () => {
             <PlusOutlined /> 新建
           </Button>,
         ]}
-
         request = {async (params, sort: Record<string, SortOrder>, filter: Record<string, (string | number)[] | null>) => {
           const res: any = await listInterfaceInfoByPageUsingGET({
             ...params
@@ -340,44 +345,43 @@ const TableList: React.FC = () => {
             }
           }
         }}
-        columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {
             setSelectedRows(selectedRows);
           },
         }}
       />
-      {selectedRowsState?.length > 0 && (
-        <FooterToolbar
-          extra={
-            <div>
-              已选择{' '}
-              <a
-                style={{
-                  fontWeight: 600,
-                }}
-              >
-                {selectedRowsState.length}
-              </a>{' '}
-              项 &nbsp;&nbsp;
-              <span>
-                服务调用次数总计 {selectedRowsState.reduce((pre, item) => pre + item.callNo!, 0)} 万
-              </span>
-            </div>
-          }
-        >
-          <Button
-            onClick={async () => {
-              await handleRemove(selectedRowsState);
-              setSelectedRows([]);
-              actionRef.current?.reloadAndRest?.();
-            }}
-          >
-            批量删除
-          </Button>
-          <Button type="primary">批量审批</Button>
-        </FooterToolbar>
-      )}
+      {/*{selectedRowsState?.length > 0 && (*/}
+        {/*<FooterToolbar*/}
+          {/*extra={*/}
+            {/*<div>*/}
+              {/*已选择{' '}*/}
+              {/*<a*/}
+                {/*style={{*/}
+                  {/*fontWeight: 600,*/}
+                {/*}}*/}
+              {/*>*/}
+                {/*{selectedRowsState.length}*/}
+              {/*</a>{' '}*/}
+              {/*项 &nbsp;&nbsp;*/}
+              {/*<span>*/}
+                {/*服务调用次数总计 {selectedRowsState.reduce((pre, item) => pre + item.callNo!, 0)} 万*/}
+              {/*</span>*/}
+            {/*</div>*/}
+          {/*}*/}
+        {/*>*/}
+          {/*<Button*/}
+            {/*onClick={async () => {*/}
+              {/*await handleRemove(selectedRowsState);*/}
+              {/*setSelectedRows([]);*/}
+              {/*actionRef.current?.reloadAndRest?.();*/}
+            {/*}}*/}
+          {/*>*/}
+            {/*批量删除*/}
+          {/*</Button>*/}
+          {/*<Button type="primary">批量审批</Button>*/}
+        {/*</FooterToolbar>*/}
+      {/*)}*/}
 
       <UpdateModal
         columns={columns}

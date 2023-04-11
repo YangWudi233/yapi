@@ -65,7 +65,8 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
         flushSync(() => {
           setInitialState((s) => ({ ...s, currentUser: undefined }));
         });
-        userLogoutUsingPOST()
+        userLogoutUsingPOST();
+        history.push(`/user/login`);
         return;
       }
       history.push(`/account/${key}`);
@@ -91,9 +92,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
 
   const { currentUser } = initialState;
 
-  if (!currentUser || !currentUser.name) {
-    return loading;
-  }
+
 
   const menuItems = [
     ...(menu
