@@ -67,6 +67,13 @@ const Register: React.FC = () => {
   };
   const handleSubmit = async (values: API.UserRegisterRequest) => {
     try {
+      const {userPassword, checkPassword} = values
+      //简单校验
+      if (userPassword !== checkPassword) {
+        const defaultLoginFailureMessage = '两次输入密码不一致，请重新输入';
+        message.error(defaultLoginFailureMessage);
+        return;
+      }
       // 注册
       const res = await userRegisterUsingPOST({
         ...values,
@@ -147,6 +154,16 @@ const Register: React.FC = () => {
                     required: true,
                     message: '用户名是必填项！',
                   },
+                  {
+                    min: 4,
+                    type: 'string',
+                    message: '长度只能取4位到8位之间！',
+                  },
+                  {
+                    max: 8,
+                    type: 'string',
+                    message: '长度只能取4位到8位之间！',
+                  },
                 ]}
               />
               <ProFormText.Password
@@ -160,6 +177,11 @@ const Register: React.FC = () => {
                   {
                     required: true,
                     message: '密码是必填项！',
+                  },
+                  {
+                    min: 8,
+                    type: 'string',
+                    message: '长度不能小于8！',
                   },
                 ]}
               />
@@ -188,13 +210,12 @@ const Register: React.FC = () => {
           )}
           <div
             style={{
-              marginBottom: 24,
+              marginBottom: 70,
             }}
           >
             <Link to="/user/login" style={{
               float: 'right',
             }}>用户登录</Link>
-
           </div>
         </LoginForm>
       </div>

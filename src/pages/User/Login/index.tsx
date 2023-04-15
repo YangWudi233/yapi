@@ -117,7 +117,7 @@ const Login: React.FC = () => {
       }
       setUserLoginState(res);
     } catch (error) {
-      const defaultLoginFailureMessage = '登录失败，请重试！';
+      const defaultLoginFailureMessage = '登录失败，请检查密码账号是否正确！';
       console.log(error);
       message.error(defaultLoginFailureMessage);
     }
@@ -200,7 +200,7 @@ const Login: React.FC = () => {
 
           <div
             style={{
-              marginBottom: 24,
+              marginBottom: 70,
             }}
           >
             <Link to="/user/register" style={{

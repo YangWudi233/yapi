@@ -44,13 +44,15 @@ export async function updateUser(
 /** Delete user This can only be done by the logged in user. DELETE /user/${param0} */
 export async function deleteUser(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.deleteUserParams,
+  body: API.deleteUserParams,
   options?: { [key: string]: any },
 ) {
-  const { username: param0, ...queryParams } = params;
-  return request<any>(`/user/${param0}`, {
-    method: 'DELETE',
-    params: { ...queryParams },
+  return request<any>(`/api/user/delete`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
     ...(options || {}),
   });
 }

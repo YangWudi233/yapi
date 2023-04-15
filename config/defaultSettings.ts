@@ -7,11 +7,9 @@ const Settings: ProLayoutProps & {
   pwa?: boolean;
   logo?: string;
 } = {
-
   layout: "mix",
   splitMenus: false,
   siderMenuType: "sub",
-
   navTheme: 'light',
   // 拂晓蓝
   colorPrimary: '#1677FF',

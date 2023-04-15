@@ -65,7 +65,7 @@ const TableList: React.FC = () => {
    * @zh-CN 添加节点
    * @param fields
    */
-  const handleAdd = async (fields: API.InterfaceInfo) => {
+    const handleAdd = async (fields: API.InterfaceInfo) => {
     const hide = message.loading('正在添加');
     try {
       await addInterfaceInfoUsingPOST({
@@ -222,12 +222,12 @@ const TableList: React.FC = () => {
       valueType: 'textarea',
 
     },
-    // {
-    //   title: '请求参数',
-    //   dataIndex: 'requestParams',
-    //   hideInForm:true,
-    //   valueType: 'textarea',
-    // },
+    {
+      title: '请求参数',
+      dataIndex: 'requestParams',
+      hideInForm:true,
+      valueType: 'textarea',
+    },
     // {
     //   title: '请求头',
     //   dataIndex: 'requestHeader',
@@ -252,13 +252,13 @@ const TableList: React.FC = () => {
       title: '创建时间',
       dataIndex: 'createTime',
       valueType: 'dateRange',
-      hideInForm: true,
+      hideInTable: true // 列表隐藏
     },
     {
       title: '更新时间',
       dataIndex: 'updateTime',
       valueType: 'dateRange',
-      hideInForm: true
+      hideInTable: true // 列表隐藏
     },
     {
       title: '操作',
@@ -321,8 +321,8 @@ const TableList: React.FC = () => {
             type="primary"
             key="primary"
             onClick={() => {
-              handleModalOpen(true);
-            }}
+            handleModalOpen(true);
+          }}
           >
             <PlusOutlined /> 新建
           </Button>,
