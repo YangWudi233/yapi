@@ -15,7 +15,7 @@ import {SortOrder} from "antd/lib/table/interface";
 import {
   addInterfaceInfoUsingPOST,
   deleteInterfaceInfoUsingPOST,
-  listInterfaceInfoByPageUsingGET,
+  listInterfaceInfoByPageUsingPOST,
   offlineInterfaceInfoUsingPOST,
   onlineInterfaceInfoUsingPOST,
   updateInterfaceInfoUsingPOST
@@ -328,7 +328,7 @@ const TableList: React.FC = () => {
           </Button>,
         ]}
         request = {async (params, sort: Record<string, SortOrder>, filter: Record<string, (string | number)[] | null>) => {
-          const res: any = await listInterfaceInfoByPageUsingGET({
+          const res: any = await listInterfaceInfoByPageUsingPOST({
             ...params
           })
           if (res?.data){

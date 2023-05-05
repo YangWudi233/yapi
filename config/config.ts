@@ -73,8 +73,10 @@ export default defineConfig({
    * @name layout 插件
    * @doc https://umijs.org/docs/max/layout-menu
    */
-  title: '',
+  title: '乐天接口',
   layout: {
+    layout: 'mix',
+    splitMenus: true,
     locale: true,
     ...defaultSettings,
   },

@@ -1,32 +1,22 @@
-import { ProLayoutProps } from '@ant-design/pro-components';
+import { Settings as LayoutSettings } from '@ant-design/pro-layout';
 
-/**
- * @name
- */
-const Settings: ProLayoutProps & {
+const Settings: LayoutSettings & {
   pwa?: boolean;
   logo?: string;
 } = {
-  layout: "mix",
-  splitMenus: false,
-  siderMenuType: "sub",
-  navTheme: 'light',
-  // 拂晓蓝
-  colorPrimary: '#1677FF',
-  // layout: 'top',
+  navTheme: 'dark',//'light',
+  layout: 'topmenu',
+  splitMenus: true,
+  primaryColor: '#13C2C2',
   contentWidth: 'Fluid',
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: '乐天接口',
-  pwa: true,
-  // logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
-  // iconfontUrl: '',
-  token: {
-    // 参见ts声明，demo 见文档，通过token 修改样式
-    //https://procomponents.ant.design/components/layout#%E9%80%9A%E8%BF%87-token-%E4%BF%AE%E6%94%B9%E6%A0%B7%E5%BC%8F
-  },
+  title: '乐天接口', // 菜单栏标题
+  pwa: false,
+  logo: '/logo.jpg', // 菜单栏图标
+  iconfontUrl: '',
 };
-
 export default Settings;
+
 

@@ -1,7 +1,7 @@
 import { PageContainer } from '@ant-design/pro-components';
 import React, {useEffect, useState} from 'react';
 import {List, message} from "antd";
-import {listInterfaceInfoByPageUsingGET} from "@/services/yslapi-backend/interfaceInfoController";
+import {listInterfaceInfoByPageUsingPOST} from "@/services/yslapi-backend/interfaceInfoController";
 
 
   /**
@@ -13,10 +13,10 @@ import {listInterfaceInfoByPageUsingGET} from "@/services/yslapi-backend/interfa
     const [list, setList] = useState<API.InterfaceInfo[]>([]);
     const [total ,setTotal] = useState<number>(0);
 
-    const loadData = async (current=1 , pageSize =10 ) =>{
+    const loadData = async (current=1 , pageSize =7 ) =>{
       setLoading(true);
       try {
-        const res = await listInterfaceInfoByPageUsingGET({
+        const res = await listInterfaceInfoByPageUsingPOST({
           current,pageSize
         });
         setList(res?.data?.records ?? []);
