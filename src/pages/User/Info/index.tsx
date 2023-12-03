@@ -25,9 +25,6 @@ const PersonalCenter = () => {
       userPassword: '******',
       createTime: '2023-01-15 14:30:00',}
   );
-
-
-
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
