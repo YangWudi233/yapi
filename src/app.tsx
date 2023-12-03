@@ -14,6 +14,7 @@ const loginPath = '/user/login';
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
 export async function getInitialState(): Promise<InitislState> {
+
   const state: InitislState = {
     loginUser: undefined,
   }
@@ -70,10 +71,11 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     ],
     links: isDev
       ? [
-          <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
+          // <a key="openapi" href="http://119.3.170.146/files/ww.jpg" target="_blank" rel="noopener noreferrer">
+          <a key="openapi" href="http://119.3.170.146/files/LeTianSDK.jar" target="_blank">
             <LinkOutlined />
-            <span>OpenAPI 文档</span>
-          </Link>,
+            <span>接口调用工具SDK</span>
+          </a>,
         ]
       : [],
     menuHeaderRender: undefined,

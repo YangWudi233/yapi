@@ -144,7 +144,7 @@ const Login: React.FC = () => {
           }}
           logo={<img alt="logo" src="/logo.jpg" />}
           title="乐天接口"
-          subTitle={'玲珑杯参赛作品'}
+          subTitle={''}
           initialValues={{
             autoLogin: true,
           }}

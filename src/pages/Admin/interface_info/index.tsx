@@ -217,7 +217,7 @@ const TableList: React.FC = () => {
     },
     {
       title: '网络地址url',
-      hideInForm:true,
+      // hideInForm:true,
       dataIndex: 'url',
       valueType: 'textarea',
 
@@ -225,7 +225,7 @@ const TableList: React.FC = () => {
     {
       title: '请求参数',
       dataIndex: 'requestParams',
-      hideInForm:true,
+      // hideInForm:true,
       valueType: 'textarea',
     },
     // {

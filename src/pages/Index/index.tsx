@@ -2,6 +2,7 @@ import { PageContainer } from '@ant-design/pro-components';
 import React, {useEffect, useState} from 'react';
 import {List, message} from "antd";
 import {listInterfaceInfoByPageUsingPOST} from "@/services/yslapi-backend/interfaceInfoController";
+import {Link} from "react-router-dom";
 
 
   /**
@@ -32,7 +33,7 @@ import {listInterfaceInfoByPageUsingPOST} from "@/services/yslapi-backend/interf
     },[])
 
   return (
-    <PageContainer title={"三个学渣在线接口开发平台"}>
+    <PageContainer title={"在线接口开发平台"}>
       <List
         className="my-list"
         loading={loading}
@@ -41,12 +42,15 @@ import {listInterfaceInfoByPageUsingPOST} from "@/services/yslapi-backend/interf
         renderItem={item => {
 
           const apiLink =`/interface_info/${item.id}`;
+
           return(
             <List.Item
-              actions={[<a key={item.id} href={apiLink}>查看</a>]}
+              actions={[
+                <Link key={item.id} to={apiLink}>查看</Link>
+              ]}
             >
               <List.Item.Meta
-                title={<a href={apiLink}>{item.name}</a>}
+                title={<Link to={apiLink}>{item.name}</Link>}
                 description={item.description}
               />
             </List.Item>

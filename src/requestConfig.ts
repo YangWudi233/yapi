@@ -21,10 +21,11 @@ interface ResponseStructure {
 /**
  * @name 错误处理
  * pro 自带的错误处理， 可以在这里做自己的改动
- * @doc https://umijs.org/docs/max/request#配置
+ * @doc https://umijs.org/docs/max/request#配置http://119.3.170.146/
  */
 export const requestConfig: RequestConfig = {
-  baseURL: 'http://8.130.68.218:7529',
+  baseURL: 'http://localhost:7529',
+  // baseURL: 'http://119.3.170.146:7529',
   withCredentials: true,
 
   // 请求拦截器
@@ -43,7 +44,7 @@ export const requestConfig: RequestConfig = {
       const { data } = response as unknown as ResponseStructure;
       console.log("data",data);
       if (data.code !== 0){
-        throw new Error('响应错误，'+data.message);
+        throw new Error('响应错误::'+data.message);
       }
 
       return response;

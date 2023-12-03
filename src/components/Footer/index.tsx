@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
       links={[
         {
           key: 'Ant Design Pro',
-          title: '杨树林',
+          title: '开源代码',
           href: 'https://github.com/YangWudi233/yapi',
           blankTarget: true,
         },
