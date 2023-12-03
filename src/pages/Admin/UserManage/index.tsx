@@ -92,6 +92,7 @@ export default (values: API.User) => {
             userId,
             ...params,
           });
+
           return {
             total: userList1.data.total,
             data: userList1.data.records
